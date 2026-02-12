@@ -2,7 +2,7 @@
 const errorHandlerMiddleware = async(err,req,res,next)=>{
 
     if(err instanceof Error){
-        return res.status(err.status).json({
+        return res.status(500).json({
             msg:err.message
         })
     }
