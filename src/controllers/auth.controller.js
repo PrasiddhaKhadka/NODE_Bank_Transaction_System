@@ -37,4 +37,41 @@ const register = async (req, res) => {
   })
 }
 
-module.exports = { register }
+
+const login = async (req, res) => {
+  const { email, password } = req.body
+
+  const user = await User.findOne({ email }).select('+password')
+
+  if (!user) {
+    return res.status(400).json({
+      message: "Invalid email or password"
+    })
+  }
+
+  const isPasswordMatch = await user.comparePassword(password)
+
+  if (!isPasswordMatch) {
+    return res.status(400).json({
+      message: "Invalid email or password"
+    })
+  }
+
+  const tokenData = { userId: user._id, email: user.email }
+
+  const token = attachCookietoResponse(res, tokenData)
+
+  res.status(200).json({
+    message:'Success',
+    user: {
+      _id: user._id,
+      email: user.email,
+      name: user.name
+    },
+    token
+  })
+}
+
+
+
+module.exports = { register,login }
