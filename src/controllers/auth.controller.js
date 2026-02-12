@@ -1,5 +1,6 @@
 const User = require('../models/user.models')
 const { attachCookietoResponse } = require('../utils/jwt')
+const sendMailAfterLogin = require('../utils/send_email')
 
 
 
@@ -61,6 +62,9 @@ const login = async (req, res) => {
 
   const token = attachCookietoResponse(res, tokenData)
 
+
+   sendMailAfterLogin()
+
   res.status(200).json({
     message:'Success',
     user: {
@@ -70,6 +74,7 @@ const login = async (req, res) => {
     },
     token
   })
+
 }
 
 
