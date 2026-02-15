@@ -7,6 +7,7 @@ const notFoundMiddleware = require('./middlewares/not_found.middleware')
 const errorHandlerMiddleware = require('./middlewares/error.middleware')
 const cookieParser = require('cookie-parser')
 const accountRouter = require('./routes/account.routes')
+const transactionRoutes = require('./routes/transaction.routes')
 
 
 app.use(express.json())
@@ -15,6 +16,8 @@ app.use(cookieParser())
 
 app.use('/api/v1/auth',authRouter)
 app.use('/api/v1/account',accountRouter)
+app.use('/api/v1/transactions',transactionRoutes)
+
 
 app.use(errorHandlerMiddleware)
 app.use(notFoundMiddleware)
