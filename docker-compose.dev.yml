@@ -5,7 +5,7 @@ services:
     build: 
       context: .
       target: development
-    containers_name: node-bank-transaction-system-dev
+    container_name: node-bank-transaction-system-dev
     ports:
       - "8000:8000"
     volumes:
@@ -19,7 +19,7 @@ services:
       - bank_network
   
   mongo:
-    image: mongo:7
+    image: mongo:latest
     container_name: mongo-dev
     ports:
       - "27017:27017"

@@ -14,6 +14,13 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
+app.get('/',(req,res)=>{
+    res.status(200).json({
+        status:'success',
+        msg:'Bank Transaction system is working fine'
+    })
+})
+
 app.use('/api/v1/auth',authRouter)
 app.use('/api/v1/account',accountRouter)
 app.use('/api/v1/transactions',transactionRoutes)

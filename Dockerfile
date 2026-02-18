@@ -45,6 +45,6 @@ RUN npm prune --production
 
 
 # Expose the port that the application will run on
-EXPOSE 3000
-# Start the application using npm start
-CMD ["npm", "start"]
+EXPOSE 8000
+# Start the application using npm dev
+CMD ["npm","run","dev"]
