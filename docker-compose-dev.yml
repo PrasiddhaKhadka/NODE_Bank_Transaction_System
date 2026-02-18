@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  app:
+    build: 
+      context: .
+      target: development
+    containers_name: node-bank-transaction-system-dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+    networks:
+      - bank_network
+  
+  mongo:
+    image: mongo:7
+    container_name: mongo-dev
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - bank_network
+
+volumes:
+  mongo-data:
+
+networks:
+  bank_network:
+    driver: bridge
+    
+    
+
+      
